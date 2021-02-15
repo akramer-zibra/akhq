@@ -2,9 +2,7 @@ package org.akhq.modules;
 
 import org.akhq.configs.Connection;
 import org.akhq.configs.SchemaRegistryType;
-import org.akhq.models.AvroKeySchemaRecord;
-import org.akhq.models.AvroValueSchemaRecord;
-import org.akhq.models.Record;
+import org.akhq.models.*;
 import org.akhq.repositories.AvroWireFormatConverter;
 import org.akhq.repositories.CustomDeserializerRepository;
 import org.akhq.repositories.RecordRepository;
@@ -49,17 +47,18 @@ public class RecordFactory {
         );
 
         Deserializer kafkaAvroDeserializer = this.schemaRegistryRepository.getKafkaAvroDeserializer(clusterId);
+        ProtobufToJsonDeserializer protobufToJsonDeserializer = customDeserializerRepository.getProtobufToJsonDeserializer(clusterId);
 
         if(keySchemaId != null) {
             akhqRecord = new AvroKeySchemaRecord(akhqRecord, kafkaAvroDeserializer);
-        } else {
-            // Protobuf or none
+        } else if(protobufToJsonDeserializer != null) {
+            akhqRecord = new ProtoBufKeySchemaRecord(akhqRecord, protobufToJsonDeserializer);
         }
 
         if(valueSchemaId != null) {
             akhqRecord = new AvroValueSchemaRecord(akhqRecord, kafkaAvroDeserializer);
-        } else {
-            // Protobuf or none
+        } else if (protobufToJsonDeserializer != null) {
+            akhqRecord = new ProtoBufValueSchemaRecord(akhqRecord, protobufToJsonDeserializer);
         }
 
         return akhqRecord;
