@@ -23,7 +23,7 @@ import java.util.*;
 @Getter
 @NoArgsConstructor
 public class Record {
-    private String topic;
+    protected String topic;
     private int partition;
     private long offset;
     private ZonedDateTime timestamp;
@@ -32,19 +32,16 @@ public class Record {
     private Integer keySchemaId;
     private Integer valueSchemaId;
     private Map<String, String> headers = new HashMap<>();
-    @JsonIgnore
-    private Deserializer kafkaAvroDeserializer;
-    private ProtobufToJsonDeserializer protobufToJsonDeserializer;
     @Getter(AccessLevel.NONE)
-    private byte[] bytesKey;
+    protected byte[] bytesKey;
     @Getter(AccessLevel.NONE)
-    private String key;
+    protected String key;
     @Getter(AccessLevel.NONE)
-    private byte[] bytesValue;
+    protected byte[] bytesValue;
     @Getter(AccessLevel.NONE)
-    private String value;
+    protected String value;
 
-    private final List<String> exceptions = new ArrayList<>();
+    protected final List<String> exceptions = new ArrayList<>();
 
     public Record(RecordMetadata record, Integer keySchemaId, Integer valueSchemaId, byte[] bytesKey, byte[] bytesValue, Map<String, String> headers) {
         this.topic = record.topic();
@@ -58,8 +55,7 @@ public class Record {
         this.headers = headers;
     }
 
-    public Record(ConsumerRecord<byte[], byte[]> record, Integer keySchemaId, Integer valueSchemaId, Deserializer kafkaAvroDeserializer,
-                  ProtobufToJsonDeserializer protobufToJsonDeserializer, byte[] bytesValue) {
+    public Record(ConsumerRecord<byte[], byte[]> record, Integer keySchemaId, Integer valueSchemaId, byte[] bytesValue) {
         this.topic = record.topic();
         this.partition = record.partition();
         this.offset = record.offset();
@@ -72,62 +68,13 @@ public class Record {
         for (Header header: record.headers()) {
             this.headers.put(header.key(), header.value() != null ? new String(header.value()) : null);
         }
-
-        this.kafkaAvroDeserializer = kafkaAvroDeserializer;
-        this.protobufToJsonDeserializer = protobufToJsonDeserializer;
     }
 
     public String getKey() {
-        if (this.key == null) {
-            this.key = convertToString(bytesKey, keySchemaId, true);
-        }
-
         return this.key;
     }
 
-    @JsonIgnore
-    public String getKeyAsBase64() {
-        if (bytesKey == null) {
-            return null;
-        } else {
-            return new String(Base64.getEncoder().encode(bytesKey));
-        }
-    }
-
     public String getValue() {
-        if (this.value == null) {
-            this.value = convertToString(bytesValue, valueSchemaId, false);
-        }
-
         return this.value;
-    }
-
-    private String convertToString(byte[] payload, Integer schemaId, boolean isKey) {
-        if (payload == null) {
-            return null;
-        } else if (schemaId != null) {
-            try {
-                GenericRecord record = (GenericRecord) kafkaAvroDeserializer.deserialize(topic, payload);
-                return AvroToJsonSerializer.toJson(record);
-            } catch (Exception exception) {
-                this.exceptions.add(exception.getMessage());
-
-                return new String(payload);
-            }
-        } else {
-            if (protobufToJsonDeserializer != null) {
-                try {
-                    String record = protobufToJsonDeserializer.deserialize(topic, payload, isKey);
-                    if (record != null) {
-                        return record;
-                    }
-                } catch (Exception exception) {
-                    this.exceptions.add(exception.getMessage());
-
-                    return new String(payload);
-                }
-            }
-            return new String(payload);
-        }
     }
 }
