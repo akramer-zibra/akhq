@@ -43,13 +43,13 @@ jobs:
             ${{ runner.os }}-node-modules-
 
       - name: Cache client build files
-          uses: actions/cache@v2
-          with:
-            path: |
-              ~/client/build
-            key: ${{ runner.os }}-client-build-${{ hashFiles('client/src/**'), hashFiles('client/public/**') }}
-            restore-keys: |
-              ${{ runner.os }}-client-build-
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/client/build
+          key: ${{ runner.os }}-client-build-${{ hashFiles('client/src/**'), hashFiles('client/public/**') }}
+          restore-keys: |
+            ${{ runner.os }}-client-build-
 
       - name: Run test code with Gradle task
         run: ./gradlew :test --tests "org.akhq.modules.RecordFactoryTest"
