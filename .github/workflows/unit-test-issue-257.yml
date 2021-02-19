@@ -39,4 +39,5 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Run test code with Gradle task
-        run: ./gradlew :test --tests "org.akhq.modules.RecordFactoryTest"
+        # run: ./gradlew :test --tests "org.akhq.modules.RecordFactoryTest"
+        run: ./gradlew :test
