@@ -54,4 +54,9 @@ class RecordFactoryTest {
 
         // TODO: Test
     }
+
+    @Test
+    public void testMethod() {
+        assertEquals(true, true);
+    }
 }
