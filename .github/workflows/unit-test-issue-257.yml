@@ -47,7 +47,7 @@ jobs:
         with:
           path: |
             ~/client/build
-          key: ${{ runner.os }}-client-build-${{ hashFiles('client/src/**'), hashFiles('client/public/**') }}
+          key: ${{ runner.os }}-client-build-${{ hashFiles('client/src/**', 'client/public/**') }}
           restore-keys: |
             ${{ runner.os }}-client-build-
 
