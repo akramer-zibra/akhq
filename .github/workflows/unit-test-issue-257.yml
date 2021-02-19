@@ -39,8 +39,8 @@ jobs:
           path: |
             ~/client/node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('client/package-lock.json') }}
-            restore-keys: |
-              ${{ runner.os }}-node-modules-
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
 
       - name: Run test code with Gradle task
         run: ./gradlew :test --tests "org.akhq.modules.RecordFactoryTest"
