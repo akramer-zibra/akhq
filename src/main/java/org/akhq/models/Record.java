@@ -55,7 +55,7 @@ public class Record {
         this.headers = headers;
     }
 
-    public Record(ConsumerRecord<byte[], byte[]> record, Integer keySchemaId, Integer valueSchemaId, byte[] bytesValue) {
+    public Record(ConsumerRecord<byte[], byte[]> record, Integer keySchemaId, Integer valueSchemaId) {
         this.topic = record.topic();
         this.partition = record.partition();
         this.offset = record.offset();
@@ -63,7 +63,7 @@ public class Record {
         this.timestampType = record.timestampType();
         this.bytesKey = record.key();
         this.keySchemaId = keySchemaId;
-        this.bytesValue = bytesValue;
+        this.bytesValue = record.value();
         this.valueSchemaId = valueSchemaId;
         for (Header header: record.headers()) {
             this.headers.put(header.key(), header.value() != null ? new String(header.value()) : null);
@@ -71,10 +71,16 @@ public class Record {
     }
 
     public String getKey() {
+        if(this.key == null) {
+            this.key = new String(this.bytesKey);
+        }
         return this.key;
     }
 
     public String getValue() {
+        if(this.value == null) {
+            this.value = new String(this.bytesValue);
+        }
         return this.value;
     }
 }
