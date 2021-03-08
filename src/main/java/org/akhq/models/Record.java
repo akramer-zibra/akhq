@@ -71,6 +71,10 @@ public class Record {
     }
 
     public String getKey() {
+        if(this.bytesKey == null) {
+            return null;
+        }
+
         if(this.key == null) {
             this.key = new String(this.bytesKey);
         }
@@ -78,6 +82,10 @@ public class Record {
     }
 
     public String getValue() {
+        if(this.bytesValue == null) {
+            return null;
+        }
+
         if(this.value == null) {
             this.value = new String(this.bytesValue);
         }

@@ -47,14 +47,26 @@ public class RecordFactory {
 
         if(keySchemaId != null) {
             akhqRecord = new AvroKeySchemaRecord(akhqRecord, kafkaAvroDeserializer);
-        } else if(protobufToJsonDeserializer != null) {
-            akhqRecord = new ProtoBufKeySchemaRecord(akhqRecord, protobufToJsonDeserializer);
+        } else {
+            if(protobufToJsonDeserializer != null) {
+                var protoBufKey = new ProtoBufKeySchemaRecord(akhqRecord, protobufToJsonDeserializer);
+                if(protoBufKey.getKey() != null) {
+                    akhqRecord = protoBufKey;
+                }
+            }
+            // default: string deserializer
         }
 
         if(valueSchemaId != null) {
             akhqRecord = new AvroValueSchemaRecord(akhqRecord, kafkaAvroDeserializer);
-        } else if (protobufToJsonDeserializer != null) {
-            akhqRecord = new ProtoBufValueSchemaRecord(akhqRecord, protobufToJsonDeserializer);
+        } else {
+            if (protobufToJsonDeserializer != null) {
+                var protoBufValue = new ProtoBufValueSchemaRecord(akhqRecord, protobufToJsonDeserializer);
+                if(protoBufValue.getValue() != null) {
+                    akhqRecord = protoBufValue;
+                }
+            }
+            // default: string deserializer
         }
 
         return akhqRecord;
