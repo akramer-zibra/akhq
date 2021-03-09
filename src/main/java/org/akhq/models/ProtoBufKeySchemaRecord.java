@@ -3,11 +3,10 @@ package org.akhq.models;
 import org.akhq.utils.ProtobufToJsonDeserializer;
 
 public class ProtoBufKeySchemaRecord extends Record {
-    private final Record record;
     private final ProtobufToJsonDeserializer protoBufDeserializer;
 
     public ProtoBufKeySchemaRecord(Record record, ProtobufToJsonDeserializer protoBufDeserializer) {
-        this.record = record;
+        super(record);
         this.protoBufDeserializer = protoBufDeserializer;
     }
 

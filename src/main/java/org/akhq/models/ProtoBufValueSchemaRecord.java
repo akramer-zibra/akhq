@@ -6,11 +6,10 @@ import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.common.serialization.Deserializer;
 
 public class ProtoBufValueSchemaRecord extends Record {
-    private final Record record;
     private final ProtobufToJsonDeserializer protoBufDeserializer;
 
     public ProtoBufValueSchemaRecord(Record record, ProtobufToJsonDeserializer protoBufDeserializer) {
-        this.record = record;
+        super(record);
         this.protoBufDeserializer = protoBufDeserializer;
     }
 
