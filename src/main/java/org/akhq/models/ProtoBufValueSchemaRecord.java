@@ -23,7 +23,7 @@ public class ProtoBufValueSchemaRecord extends Record {
     public String getValue() {
         if(this.value == null) {
             try {
-                String record = protoBufDeserializer.deserialize(topic, bytesValue, false);
+                String record = protoBufDeserializer.deserialize(this.record.topic, this.record.bytesValue, false);
                 if (record != null) {
                     this.value = record;
                 }

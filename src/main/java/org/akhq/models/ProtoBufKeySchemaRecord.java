@@ -15,7 +15,7 @@ public class ProtoBufKeySchemaRecord extends Record {
     public String getKey() {
         if(this.key == null) {
             try {
-                String record = protoBufDeserializer.deserialize(topic, bytesKey, true);
+                String record = protoBufDeserializer.deserialize(this.record.topic, this.record.bytesKey, true);
                 if (record != null) {
                     this.key = record;
                 }

@@ -20,7 +20,7 @@ public class AvroKeySchemaRecord extends Record {
         }
 
         try {
-            GenericRecord record = (GenericRecord) kafkaAvroDeserializer.deserialize(topic, bytesKey);
+            GenericRecord record = (GenericRecord) kafkaAvroDeserializer.deserialize(this.record.topic, this.record.bytesKey);
             return AvroToJsonSerializer.toJson(record);
         } catch (Exception exception) {
             this.exceptions.add(exception.getMessage());
