@@ -15,6 +15,11 @@ public class ProtoBufValueSchemaRecord extends Record {
     }
 
     @Override
+    public String getKey() {
+        return this.record.getKey(); // Delegates method call to wrapped record
+    }
+
+    @Override
     public String getValue() {
         if(this.value == null) {
             try {

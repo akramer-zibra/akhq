@@ -14,6 +14,11 @@ public class AvroValueSchemaRecord extends Record {
     }
 
     @Override
+    public String getKey() {
+        return this.record.getKey(); // Delegates method call to wrapped object
+    }
+
+    @Override
     public String getValue() {
         if(this.value == null) {
             try {

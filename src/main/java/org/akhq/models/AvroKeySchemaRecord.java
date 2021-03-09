@@ -28,4 +28,9 @@ public class AvroKeySchemaRecord extends Record {
             return new String(bytesKey);
         }
     }
+
+    @Override
+    public String getValue() {
+        return this.record.getValue(); // Delegates method call to wrapped record
+    }
 }

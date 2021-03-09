@@ -28,4 +28,9 @@ public class ProtoBufKeySchemaRecord extends Record {
 
         return this.key;
     }
+
+    @Override
+    public String getValue() {
+        return this.record.getValue(); // Delegates method call to wrapped record
+    }
 }
