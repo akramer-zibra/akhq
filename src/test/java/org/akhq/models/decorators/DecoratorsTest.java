@@ -58,6 +58,6 @@ public class DecoratorsTest {
         Mockito.verify(aMockedAvroDeserializer, Mockito.times(1)).deserialize(topic, keyBytes);
 
         // 2. Evaluate getValue() method calls .deserialize() from ProtoBuf deserializer
-        Mockito.verify(aMockedProtobufDeserializer, Mockito.times(1)).deserialize(topic, keyBytes, false);
+        Mockito.verify(aMockedProtobufDeserializer, Mockito.times(1)).deserialize(topic, valueBytes, false);
     }
 }
