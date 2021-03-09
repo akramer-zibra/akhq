@@ -5,11 +5,10 @@ import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.common.serialization.Deserializer;
 
 public class AvroKeySchemaRecord extends Record {
-    private final Record record;
     private final Deserializer kafkaAvroDeserializer;
 
     public AvroKeySchemaRecord(Record record, Deserializer kafkaAvroDeserializer) {
-        this.record = record;
+        super(record);
         this.kafkaAvroDeserializer = kafkaAvroDeserializer;
     }
 
