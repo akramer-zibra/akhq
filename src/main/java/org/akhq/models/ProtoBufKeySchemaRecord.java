@@ -12,20 +12,20 @@ public class ProtoBufKeySchemaRecord extends Record {
     }
 
     @Override
-    public String getValue() {
-        if(this.value == null) {
+    public String getKey() {
+        if(this.key == null) {
             try {
-                String record = protoBufDeserializer.deserialize(topic, bytesValue, false);
+                String record = protoBufDeserializer.deserialize(topic, bytesKey, true);
                 if (record != null) {
-                    this.value = record;
+                    this.key = record;
                 }
             } catch (Exception exception) {
                 this.exceptions.add(exception.getMessage());
 
-                this.value = new String(bytesValue);
+                this.key = new String(bytesKey);
             }
         }
 
-        return this.value;
+        return this.key;
     }
 }
