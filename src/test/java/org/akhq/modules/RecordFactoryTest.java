@@ -65,7 +65,5 @@ class RecordFactoryTest {
 
         Record akhqRecord = underTest.newRecord(kafkaRecord, "none");
         assertThat(akhqRecord, instanceOf(AvroValueSchemaRecord.class));
-        String decorated = akhqRecord.getValue();
-        assertThat(decorated, is(jsonValue));
     }
 }
