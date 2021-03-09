@@ -22,7 +22,7 @@ public class ProtoBufKeySchemaRecord extends Record {
             } catch (Exception exception) {
                 this.exceptions.add(exception.getMessage());
 
-                this.key = new String(bytesKey);
+                this.key = new String(this.record.bytesKey);
             }
         }
 

@@ -30,7 +30,7 @@ public class ProtoBufValueSchemaRecord extends Record {
             } catch (Exception exception) {
                 this.exceptions.add(exception.getMessage());
 
-                this.value = new String(bytesValue);
+                this.value = new String(this.record.bytesValue);
             }
         }
 

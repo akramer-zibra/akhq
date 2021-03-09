@@ -25,7 +25,7 @@ public class AvroKeySchemaRecord extends Record {
         } catch (Exception exception) {
             this.exceptions.add(exception.getMessage());
 
-            return new String(bytesKey);
+            return new String(this.record.bytesKey);
         }
     }
 
