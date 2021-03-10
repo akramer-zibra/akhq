@@ -5,7 +5,7 @@ import org.akhq.utils.AvroToJsonSerializer;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.common.serialization.Deserializer;
 
-public class AvroKeySchemaRecord extends Record {
+public class AvroKeySchemaRecord extends RecordDecorator {
     private final Deserializer kafkaAvroDeserializer;
 
     public AvroKeySchemaRecord(Record record, Deserializer kafkaAvroDeserializer) {
@@ -27,10 +27,5 @@ public class AvroKeySchemaRecord extends Record {
 
             return new String(this.bytesKey);
         }
-    }
-
-    @Override
-    public String getValue() {
-        return this.getValue(); // Delegates method call to wrapped record
     }
 }

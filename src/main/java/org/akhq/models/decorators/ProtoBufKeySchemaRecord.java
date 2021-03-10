@@ -3,7 +3,7 @@ package org.akhq.models.decorators;
 import org.akhq.models.Record;
 import org.akhq.utils.ProtobufToJsonDeserializer;
 
-public class ProtoBufKeySchemaRecord extends Record {
+public class ProtoBufKeySchemaRecord extends RecordDecorator {
     private final ProtobufToJsonDeserializer protoBufDeserializer;
 
     public ProtoBufKeySchemaRecord(Record record, ProtobufToJsonDeserializer protoBufDeserializer) {
@@ -27,10 +27,5 @@ public class ProtoBufKeySchemaRecord extends Record {
         }
 
         return this.key;
-    }
-
-    @Override
-    public String getValue() {
-        return this.getValue(); // Delegates method call to wrapped record
     }
 }

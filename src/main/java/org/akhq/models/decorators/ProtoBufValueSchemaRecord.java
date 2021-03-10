@@ -6,17 +6,12 @@ import org.akhq.utils.ProtobufToJsonDeserializer;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.common.serialization.Deserializer;
 
-public class ProtoBufValueSchemaRecord extends Record {
+public class ProtoBufValueSchemaRecord extends RecordDecorator {
     private final ProtobufToJsonDeserializer protoBufDeserializer;
 
     public ProtoBufValueSchemaRecord(Record record, ProtobufToJsonDeserializer protoBufDeserializer) {
         super(record);
         this.protoBufDeserializer = protoBufDeserializer;
-    }
-
-    @Override
-    public String getKey() {
-        return this.getKey();
     }
 
     @Override
