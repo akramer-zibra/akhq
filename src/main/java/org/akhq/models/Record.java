@@ -43,21 +43,6 @@ public class Record {
 
     protected final List<String> exceptions = new ArrayList<>();
 
-    public Record(Record outer) {
-        this.topic = outer.topic;
-        this.partition = outer.partition;
-        this.offset = outer.offset;
-        this.timestamp = outer.timestamp;
-        this.timestampType = outer.timestampType;
-        this.keySchemaId = outer.keySchemaId;
-        this.valueSchemaId = outer.valueSchemaId;
-        this.headers = outer.headers;
-        this.bytesKey = outer.bytesKey;
-        this.key = outer.key;
-        this.bytesValue = outer.bytesValue;
-        this.value = outer.value;
-    }
-
     public Record(RecordMetadata record, Integer keySchemaId, Integer valueSchemaId, byte[] bytesKey, byte[] bytesValue, Map<String, String> headers) {
         this.topic = record.topic();
         this.partition = record.partition();
