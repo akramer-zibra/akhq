@@ -1,8 +1,6 @@
 package org.akhq.models.decorators;
 
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
-import org.akhq.models.AvroKeySchemaRecord;
-import org.akhq.models.ProtoBufValueSchemaRecord;
 import org.akhq.models.Record;
 import org.akhq.utils.ProtobufToJsonDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

@@ -3,7 +3,6 @@ package org.akhq.models.decorators;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.akhq.Breed;
 import org.akhq.Cat;
-import org.akhq.models.AvroKeySchemaRecord;
 import org.akhq.models.Record;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.generic.GenericRecordBuilder;

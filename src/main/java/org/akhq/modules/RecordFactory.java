@@ -2,6 +2,10 @@ package org.akhq.modules;
 
 import org.akhq.configs.SchemaRegistryType;
 import org.akhq.models.*;
+import org.akhq.models.decorators.AvroKeySchemaRecord;
+import org.akhq.models.decorators.AvroValueSchemaRecord;
+import org.akhq.models.decorators.ProtoBufKeySchemaRecord;
+import org.akhq.models.decorators.ProtoBufValueSchemaRecord;
 import org.akhq.repositories.AvroWireFormatConverter;
 import org.akhq.repositories.CustomDeserializerRepository;
 import org.akhq.repositories.RecordRepository;
@@ -10,7 +14,6 @@ import org.akhq.utils.ProtobufToJsonDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.serialization.Deserializer;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton

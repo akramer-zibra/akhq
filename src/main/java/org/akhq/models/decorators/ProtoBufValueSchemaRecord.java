@@ -1,5 +1,6 @@
-package org.akhq.models;
+package org.akhq.models.decorators;
 
+import org.akhq.models.Record;
 import org.akhq.utils.AvroToJsonSerializer;
 import org.akhq.utils.ProtobufToJsonDeserializer;
 import org.apache.avro.generic.GenericRecord;

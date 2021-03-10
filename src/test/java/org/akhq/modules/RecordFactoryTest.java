@@ -2,7 +2,7 @@ package org.akhq.modules;
 
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.akhq.KafkaTestCluster;
-import org.akhq.models.AvroValueSchemaRecord;
+import org.akhq.models.decorators.AvroValueSchemaRecord;
 import org.akhq.models.Record;
 import org.akhq.repositories.AvroWireFormatConverter;
 import org.akhq.repositories.CustomDeserializerRepository;
