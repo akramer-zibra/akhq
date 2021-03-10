@@ -11,10 +11,15 @@ public abstract class RecordDecorator extends Record {
     private Record wrapped;
 
     /**
-     * Constructor takes a record object and uses it as a reference 
+     * Constructor takes a record object and uses it as a reference
      */
     public RecordDecorator(Record record) {
         this.wrapped = record;
+    }
+
+    @Override
+    public String getTopic() {
+        return this.wrapped.getTopic();
     }
 
     @Override

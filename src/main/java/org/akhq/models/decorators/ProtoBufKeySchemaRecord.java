@@ -15,7 +15,7 @@ public class ProtoBufKeySchemaRecord extends RecordDecorator {
     public String getKey() {
         if(this.key == null) {
             try {
-                String record = protoBufDeserializer.deserialize(this.topic, this.bytesKey, true);
+                String record = protoBufDeserializer.deserialize(this.getTopic(), this.bytesKey, true);
                 if (record != null) {
                     this.key = record;
                 }

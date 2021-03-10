@@ -17,9 +17,8 @@ public class AvroValueSchemaRecord extends RecordDecorator {
     public String getValue() {
         if(this.value == null) {
             try {
-                String parentTopic = this.topic;
                 byte[] parentBytesValue = this.bytesValue;
-                GenericRecord record = (GenericRecord) kafkaAvroDeserializer.deserialize(parentTopic, parentBytesValue);
+                GenericRecord record = (GenericRecord) kafkaAvroDeserializer.deserialize(this.getTopic(), parentBytesValue);
                 this.value = AvroToJsonSerializer.toJson(record);
             } catch (Exception exception) {
                 this.exceptions.add(exception.getMessage());

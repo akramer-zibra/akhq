@@ -18,7 +18,7 @@ public class ProtoBufValueSchemaRecord extends RecordDecorator {
     public String getValue() {
         if(this.value == null) {
             try {
-                String record = protoBufDeserializer.deserialize(this.topic, this.bytesValue, false);
+                String record = protoBufDeserializer.deserialize(this.getTopic(), this.bytesValue, false);
                 if (record != null) {
                     this.value = record;
                 }
