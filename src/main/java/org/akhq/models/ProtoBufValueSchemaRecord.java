@@ -15,21 +15,21 @@ public class ProtoBufValueSchemaRecord extends Record {
 
     @Override
     public String getKey() {
-        return this.record.getKey(); // Delegates method call to wrapped record
+        return this.getKey();
     }
 
     @Override
     public String getValue() {
         if(this.value == null) {
             try {
-                String record = protoBufDeserializer.deserialize(this.record.topic, this.record.bytesValue, false);
+                String record = protoBufDeserializer.deserialize(this.topic, this.bytesValue, false);
                 if (record != null) {
                     this.value = record;
                 }
             } catch (Exception exception) {
                 this.exceptions.add(exception.getMessage());
 
-                this.value = new String(this.record.bytesValue);
+                this.value = new String(this.bytesValue);
             }
         }
 

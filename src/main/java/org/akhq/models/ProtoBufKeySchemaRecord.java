@@ -14,14 +14,14 @@ public class ProtoBufKeySchemaRecord extends Record {
     public String getKey() {
         if(this.key == null) {
             try {
-                String record = protoBufDeserializer.deserialize(this.record.topic, this.record.bytesKey, true);
+                String record = protoBufDeserializer.deserialize(this.topic, this.bytesKey, true);
                 if (record != null) {
                     this.key = record;
                 }
             } catch (Exception exception) {
                 this.exceptions.add(exception.getMessage());
 
-                this.key = new String(this.record.bytesKey);
+                this.key = new String(this.bytesKey);
             }
         }
 
@@ -30,6 +30,6 @@ public class ProtoBufKeySchemaRecord extends Record {
 
     @Override
     public String getValue() {
-        return this.record.getValue(); // Delegates method call to wrapped record
+        return this.getValue(); // Delegates method call to wrapped record
     }
 }
