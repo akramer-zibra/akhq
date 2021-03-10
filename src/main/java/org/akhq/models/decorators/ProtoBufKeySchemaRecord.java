@@ -15,14 +15,14 @@ public class ProtoBufKeySchemaRecord extends RecordDecorator {
     public String getKey() {
         if(this.key == null) {
             try {
-                String record = protoBufDeserializer.deserialize(this.getTopic(), this.bytesKey, true);
+                String record = protoBufDeserializer.deserialize(this.getTopic(), this.getBytesKey(), true);
                 if (record != null) {
                     this.key = record;
                 }
             } catch (Exception exception) {
-                this.exceptions.add(exception.getMessage());
+                this.getExceptions().add(exception.getMessage());
 
-                this.key = new String(this.bytesKey);
+                this.key = new String(this.getBytesKey());
             }
         }
 

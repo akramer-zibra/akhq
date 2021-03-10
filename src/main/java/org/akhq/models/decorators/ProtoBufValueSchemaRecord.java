@@ -18,14 +18,14 @@ public class ProtoBufValueSchemaRecord extends RecordDecorator {
     public String getValue() {
         if(this.value == null) {
             try {
-                String record = protoBufDeserializer.deserialize(this.getTopic(), this.bytesValue, false);
+                String record = protoBufDeserializer.deserialize(this.getTopic(), this.getBytesValue(), false);
                 if (record != null) {
                     this.value = record;
                 }
             } catch (Exception exception) {
-                this.exceptions.add(exception.getMessage());
+                this.getExceptions().add(exception.getMessage());
 
-                this.value = new String(this.bytesValue);
+                this.value = new String(this.getBytesValue());
             }
         }
 

@@ -17,13 +17,12 @@ public class AvroValueSchemaRecord extends RecordDecorator {
     public String getValue() {
         if(this.value == null) {
             try {
-                byte[] parentBytesValue = this.bytesValue;
-                GenericRecord record = (GenericRecord) kafkaAvroDeserializer.deserialize(this.getTopic(), parentBytesValue);
+                GenericRecord record = (GenericRecord) kafkaAvroDeserializer.deserialize(this.getTopic(), this.getBytesValue());
                 this.value = AvroToJsonSerializer.toJson(record);
             } catch (Exception exception) {
-                this.exceptions.add(exception.getMessage());
+                this.getExceptions().add(exception.getMessage());
 
-                this.value = new String(this.bytesValue);
+                this.value = new String(this.getBytesValue());
             }
         }
 

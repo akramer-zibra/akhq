@@ -20,12 +20,12 @@ public class AvroKeySchemaRecord extends RecordDecorator {
         }
 
         try {
-            GenericRecord record = (GenericRecord) kafkaAvroDeserializer.deserialize(this.getTopic(), this.bytesKey);
+            GenericRecord record = (GenericRecord) kafkaAvroDeserializer.deserialize(this.getTopic(), this.getBytesKey());
             return AvroToJsonSerializer.toJson(record);
         } catch (Exception exception) {
-            this.exceptions.add(exception.getMessage());
+            this.getExceptions().add(exception.getMessage());
 
-            return new String(this.bytesKey);
+            return new String(this.getBytesKey());
         }
     }
 }
