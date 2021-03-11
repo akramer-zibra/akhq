@@ -32,11 +32,11 @@ public class Record {
     private Integer keySchemaId;
     private Integer valueSchemaId;
     private Map<String, String> headers = new HashMap<>();
-    @Getter(AccessLevel.NONE)
+    // @Getter(AccessLevel.NONE) // NOTICE: Decorator pattern needs access to this for delegation
     protected byte[] bytesKey;
     @Getter(AccessLevel.NONE)
     protected String key;
-    @Getter(AccessLevel.NONE)
+    // @Getter(AccessLevel.NONE) // NOTICE: Decorator pattern needs access to this for delegation
     protected byte[] bytesValue;
     @Getter(AccessLevel.NONE)
     protected String value;

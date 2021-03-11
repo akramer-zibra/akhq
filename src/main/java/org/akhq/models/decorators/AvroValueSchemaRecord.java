@@ -1,10 +1,11 @@
-package org.akhq.models;
+package org.akhq.models.decorators;
 
+import org.akhq.models.Record;
 import org.akhq.utils.AvroToJsonSerializer;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.common.serialization.Deserializer;
 
-public class AvroValueSchemaRecord extends Record {
+public class AvroValueSchemaRecord extends RecordDecorator {
     private final Deserializer kafkaAvroDeserializer;
 
     public AvroValueSchemaRecord(Record record, Deserializer kafkaAvroDeserializer) {
@@ -16,14 +17,12 @@ public class AvroValueSchemaRecord extends Record {
     public String getValue() {
         if(this.value == null) {
             try {
-                String parentTopic = this.topic;
-                byte[] parentBytesValue = this.bytesValue;
-                GenericRecord record = (GenericRecord) kafkaAvroDeserializer.deserialize(parentTopic, parentBytesValue);
+                GenericRecord record = (GenericRecord) kafkaAvroDeserializer.deserialize(this.getTopic(), this.getBytesValue());
                 this.value = AvroToJsonSerializer.toJson(record);
             } catch (Exception exception) {
-                this.exceptions.add(exception.getMessage());
+                this.getExceptions().add(exception.getMessage());
 
-                this.value = new String(this.bytesValue);
+                this.value = new String(this.getBytesValue());
             }
         }
 
