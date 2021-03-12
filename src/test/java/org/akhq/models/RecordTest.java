@@ -1,17 +1,27 @@
 package org.akhq.models;
 
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.nio.charset.StandardCharsets;
 
 public class RecordTest {
 
     @Test
-    public void testKeyByteArrayIsNullWithDecorator() {
+    public void testKeyByteArrayIsNull() {
 
         // GIVEN a record with null in key
+        byte[] keyBytes = null;
+        byte[] valueBytes = "".getBytes(StandardCharsets.UTF_8); // value property does not matter
+        ConsumerRecord<byte[], byte[]> kafkaRecord = new ConsumerRecord<>("topic", 0, 0, keyBytes, valueBytes);
+        Record record = new Record(kafkaRecord, null, null);
+
         // WHEN getKey() method is called
+        String keyString = record.getKey();
+
         // EXPECT NULL result
-        Assertions.fail();
+        Assertions.assertNull(keyString);
     }
 
     @Test
