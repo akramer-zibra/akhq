@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class RecordTest {
 
     @Test
-    public void testKeyByteArrayIsNull() {
+    public void testKeyByteArrayIsNullWithDecorator() {
 
         // GIVEN a record with null in key
         // WHEN getKey() method is called
@@ -15,7 +15,7 @@ public class RecordTest {
     }
 
     @Test
-    public void testKeyIsAvroSerialized() {
+    public void testKeyIsAvroSerializedWithDecorator() {
 
         // GIVEN a record with an avro serialized key
         // AND a schema id is given
@@ -25,7 +25,7 @@ public class RecordTest {
     }
 
     @Test
-    public void testKeyIsAvroSerializedFallback() {
+    public void testKeyIsAvroSerializedFallbackWithDecorator() {
 
         // GIVEN a record with an avro serialized key
         // AND a schema id is given
@@ -36,7 +36,7 @@ public class RecordTest {
     }
 
     @Test
-    public void testKeyIsProtobufSerialized() {
+    public void testKeyIsProtobufSerializedWithDecorator() {
 
         // GIVEN a record with a protobuf serialized key
         // AND no schema id is given
@@ -47,7 +47,7 @@ public class RecordTest {
     }
 
     @Test
-    public void testKeyIsProtobufSerializedFallback() {
+    public void testKeyIsProtobufSerializedFallbackWithDecorator() {
 
         // GIVEN a record with a protobuf serialized key
         // AND no schema id is given
@@ -59,7 +59,7 @@ public class RecordTest {
     }
 
     @Test
-    public void testKeyDefaultFallback() {
+    public void testKeyDefaultFallbackWithDecorator() {
 
         // GIVEN a record with a protobuf serialized key
         // AND no schema id exists
