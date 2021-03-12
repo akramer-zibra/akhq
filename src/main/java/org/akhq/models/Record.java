@@ -18,7 +18,10 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.*;
 
-// TODO: check lombok
+@ToString
+@EqualsAndHashCode
+@Getter
+@NoArgsConstructor
 public class Record {
     protected String topic;
     private int partition;
@@ -29,94 +32,31 @@ public class Record {
     private Integer keySchemaId;
     private Integer valueSchemaId;
     private Map<String, String> headers = new HashMap<>();
+    // @Getter(AccessLevel.NONE) // NOTICE: Decorator pattern needs access to this for delegation
     protected byte[] bytesKey;
+    @Getter(AccessLevel.NONE)
     protected String key;
+    // @Getter(AccessLevel.NONE) // NOTICE: Decorator pattern needs access to this for delegation
     protected byte[] bytesValue;
+    @Getter(AccessLevel.NONE)
     protected String value;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Record record = (Record) o;
-        return partition == record.partition && offset == record.offset && Objects.equals(topic, record.topic) && Objects.equals(timestamp, record.timestamp) && timestampType == record.timestampType && Objects.equals(keySchemaId, record.keySchemaId) && Objects.equals(valueSchemaId, record.valueSchemaId) && Objects.equals(headers, record.headers) && Arrays.equals(bytesKey, record.bytesKey) && Objects.equals(key, record.key) && Arrays.equals(bytesValue, record.bytesValue) && Objects.equals(value, record.value) && Objects.equals(exceptions, record.exceptions);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(topic, partition, offset, timestamp, timestampType, keySchemaId, valueSchemaId, headers, key, value, exceptions);
-        result = 31 * result + Arrays.hashCode(bytesKey);
-        result = 31 * result + Arrays.hashCode(bytesValue);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Record{" +
-                "topic='" + topic + '\'' +
-                ", partition=" + partition +
-                ", offset=" + offset +
-                ", timestamp=" + timestamp +
-                ", timestampType=" + timestampType +
-                ", keySchemaId=" + keySchemaId +
-                ", valueSchemaId=" + valueSchemaId +
-                ", headers=" + headers +
-                ", bytesKey=" + Arrays.toString(bytesKey) +
-                ", key='" + key + '\'' +
-                ", bytesValue=" + Arrays.toString(bytesValue) +
-                ", value='" + value + '\'' +
-                ", exceptions=" + exceptions +
-                '}';
-    }
-
-    public Record() {
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public int getPartition() {
-        return partition;
-    }
-
-    public long getOffset() {
-        return offset;
-    }
-
-    public ZonedDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public TimestampType getTimestampType() {
-        return timestampType;
-    }
-
-    public Integer getKeySchemaId() {
-        return keySchemaId;
-    }
-
-    public Integer getValueSchemaId() {
-        return valueSchemaId;
-    }
-
-    public Map<String, String> getHeaders() {
-        return headers;
-    }
-
-    public byte[] getBytesKey() {
-        return bytesKey;
-    }
-
-    public byte[] getBytesValue() {
-        return bytesValue;
-    }
-
-    public List<String> getExceptions() {
-        return exceptions;
-    }
-
     protected final List<String> exceptions = new ArrayList<>();
+
+    public Record(Record outer) {
+        this.topic = outer.topic;
+        this.partition = outer.partition;
+        this.offset = outer.offset;
+        this.timestamp = outer.timestamp;
+        this.timestampType = outer.timestampType;
+        this.keySchemaId = outer.keySchemaId;
+        this.valueSchemaId = outer.valueSchemaId;
+        this.headers = outer.headers;
+        this.bytesKey = outer.bytesKey;
+        this.key = outer.key;
+        this.bytesValue = outer.bytesValue;
+        this.value = outer.value;
+    }
 
     public Record(RecordMetadata record, Integer keySchemaId, Integer valueSchemaId, byte[] bytesKey, byte[] bytesValue, Map<String, String> headers) {
         this.topic = record.topic();
