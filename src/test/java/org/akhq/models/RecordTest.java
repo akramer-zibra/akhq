@@ -36,6 +36,15 @@ public class RecordTest {
     }
 
     @Test
+    public void testKeyIsAvroSerialized() {
+
+        // GIVEN a record with avro serialized key
+        // WHEN getKey() method is called
+        // EXPECT a string representation of the key bytes
+        Assertions.fail();
+    }
+
+    @Test
     public void testKeyIsAvroSerializedWithDecorator() {
 
         // Testdata
